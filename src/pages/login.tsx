@@ -1,8 +1,8 @@
 import {useForm} from "react-hook-form"
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import * as apiClient from "../api-clients";
 import { useAppContext } from "../contexts/appcontext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 export type SignInForm = {
@@ -11,6 +11,7 @@ export type SignInForm = {
 }
 
 const SignIn = () => {
+    const queryClient = useQueryClient();
     const {showToast} = useAppContext();
     const navigate = useNavigate();
  const {register, formState: {errors}, handleSubmit} = useForm<SignInForm>()
@@ -18,6 +19,7 @@ const SignIn = () => {
  const mutation = useMutation(apiClient.signIn, {
     onSuccess: async () => {
         showToast({message: "user signed in", type: "SUCCESS"})
+        await queryClient.invalidateQueries("validateToken")
         navigate("/");
     },
     onError: (error:Error) => {
@@ -51,7 +53,12 @@ const SignIn = () => {
                         <span className="text-red-500">{errors.password.message}</span>
                     )}
                 </label>
-                <span>
+                <span className="flex items-center justify-between">
+                    <span className="text-sm">
+                        Not Registerd? <Link className="underline" to={`/register`}>
+                            create an account here
+                        </Link>
+                    </span>
                         <button type="submit" className="bg-blue-600 text-white p-2 font-bold hover:bg-blue-500 text-xl">
                             Sign in
                         </button>
