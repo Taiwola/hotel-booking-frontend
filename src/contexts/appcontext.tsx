@@ -21,11 +21,14 @@ export const AppContextProvider = ({children}: {children: React.ReactNode}) => {
     const {isError} = useQuery("validateToken", apiClient.validateToken, {
         retry: false
     });
+
+    const showToast = (toastMessage: ToastMessage) => {
+        setToast(toastMessage);
+    };
+
     return (
         <AppContext.Provider value={{
-            showToast: (toastMessage) => {
-                (toastMessage)
-            },
+            showToast: showToast,
             isLoggedIn: !isError
         }}> 
             {toast && (<Toast message={toast.message} type={toast.type} onClose={() => setToast(undefined)} />)}
@@ -33,6 +36,7 @@ export const AppContextProvider = ({children}: {children: React.ReactNode}) => {
         </AppContext.Provider>
     )
 }
+
 
 export const useAppContext = () => {
     const context = useContext(AppContext);
