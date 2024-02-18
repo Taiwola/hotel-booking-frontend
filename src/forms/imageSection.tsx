@@ -33,7 +33,9 @@ const ImageSection = () => {
 
                 <input type="file" multiple accept="image/*" className="w-full text-gray-700 font-normal"  {...register("imageFiles", {
                     validate: (imageFiles) => {
-                        const totalLenght = imageFiles.length + (existingImageUrls.length || 0);
+                        // Ensure imageFiles and existingImageUrls are defined or have default values
+                        const totalLenght = (imageFiles ? imageFiles.length : 0) + (existingImageUrls ? existingImageUrls.length : 0);
+
 
                         if (totalLenght === 0 ) {
                             return "At least one image"

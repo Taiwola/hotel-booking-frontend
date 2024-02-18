@@ -1,6 +1,6 @@
 import { SignInForm } from "./pages/login";
 import { RegisterFormData } from "./pages/register";
-import {HotelType} from "../types"
+import {HotelSearchResponse, HotelType, SearchParams} from "../types"
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -115,6 +115,34 @@ export const updateByHotelId = async (formData: FormData) => {
     if (!res.ok) {
         throw new Error("Failed to update")
     };
+
+    return res.json();
+}
+
+export const searchHotels = async (searchParams: SearchParams): Promise<HotelSearchResponse> => {
+    const queryParams = new URLSearchParams();
+    queryParams.append("destination", searchParams.destination || "");
+    queryParams.append("checkIn", searchParams.checkIn || "");
+    queryParams.append("checkOut", searchParams.checkOut || "");
+    queryParams.append("childCount", searchParams.childCount || "");
+    queryParams.append("adultCount", searchParams.adultCount || "");
+    queryParams.append("page", searchParams.page || "");
+
+    queryParams.append("maxPrice", searchParams.maxPrice || "");
+    queryParams.append("sortOptions", searchParams.sortOptions || "");
+
+    searchParams.facilities?.forEach((facility) => queryParams.append("facilities", facility));
+    searchParams.types?.forEach((type) => queryParams.append("types", type));
+    searchParams.stars?.forEach((star) => queryParams.append("stars", star));
+
+    const res = await fetch(`${API_BASE_URL}/api/hotels/search?${queryParams}`, {
+         method: 'GET',
+         credentials: "include",
+    });
+
+    if (!res.ok) {
+        throw new Error("Error fetching function");
+    }
 
     return res.json();
 }

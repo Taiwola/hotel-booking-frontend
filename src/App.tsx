@@ -6,6 +6,7 @@ import AddHotel from "./pages/addhotel";
 import {useAppContext} from "./contexts/appcontext"
 import MyHotels from "./pages/myHotels";
 import EditHotels from "./pages/EditHotel";
+import Search from "./pages/search";
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
       </Layout>} /> 
         <Route path="/search" element={
           <Layout>
-            <p>Search Page</p>
+            <Search />
           </Layout>
         }/>
         <Route path="/dashboard" element={
