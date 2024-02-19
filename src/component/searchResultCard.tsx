@@ -27,7 +27,7 @@ const SearchResultCard = ({hotel}: Props) => {
                                 {hotel.type}
                         </span>
                     </div>
-                    <Link to={`details/${hotel._id}`} className="text-2xl font-bold cursor-pointer">{hotel.name}</Link>
+                    <Link to={`/details/${hotel._id}`} className="text-2xl font-bold cursor-pointer">{hotel.name}</Link>
                 </div>
 
                 <div className="line-clamp-2">
@@ -47,7 +47,7 @@ const SearchResultCard = ({hotel}: Props) => {
 
                     <div className="flex flex-col items-end gap-1">
                         <span className="font-bold">${hotel.pricePerNight} per night</span>
-                        <Link to={`details/${hotel._id}`} className="bg-blue-600 text-white h-full p-2 font-bold text-xl max-w-fit hover:bg-blue-500">View More</Link>
+                        <Link to={`/details/${hotel._id}`} className="bg-blue-600 text-white h-full p-2 font-bold text-xl max-w-fit hover:bg-blue-500">View More</Link>
                     </div>
                 </div>
                     

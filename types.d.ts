@@ -12,7 +12,8 @@ export type HotelType = {
     pricePerNight: number,
     starRating: number,
     imageUrls: string[],
-    lastUpdated: Date
+    lastUpdated: Date,
+    bookingtype: BookingType[]
 };
 
 
@@ -39,4 +40,36 @@ export type HotelSearchResponse = {
         pages: number
     }
    }
+}
+
+export type UserType = {
+    _id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+}
+
+
+export type PaymentResponse = {
+    paymentIntentId: string,
+    clientId: string,
+    totalCost: number
+}
+
+export type BookingType = {
+    _id: string,
+    userId: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    childCount: number,
+    adultCount: number,
+    totalCost: number,
+    checkIn: Date,
+    checkOut: Date
+}
+
+
+export type roomBooking = {
+    
 }

@@ -7,6 +7,8 @@ import {useAppContext} from "./contexts/appcontext"
 import MyHotels from "./pages/myHotels";
 import EditHotels from "./pages/EditHotel";
 import Search from "./pages/search";
+import Details from "./pages/details";
+import Booking from "./pages/bookings";
 
 
 function App() {
@@ -22,6 +24,17 @@ function App() {
             <Search />
           </Layout>
         }/>
+
+
+          <Route
+           path="/details/:hotelId"
+           element={
+            <Layout>
+              <Details />
+            </Layout>
+           } 
+            />
+
         <Route path="/dashboard" element={
           <p>Dashboard</p>
         }/>
@@ -52,11 +65,20 @@ function App() {
            } 
             />
 
-<Route
+          <Route
            path="/edit-hotel/:Id"
            element={
             <Layout>
               <EditHotels />
+            </Layout>
+           } 
+            />
+
+          <Route
+           path={`/hotel/:hotelId/booking`}
+           element={
+            <Layout>
+              <Booking />
             </Layout>
            } 
             />
