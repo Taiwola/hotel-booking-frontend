@@ -9,6 +9,8 @@ import EditHotels from "./pages/EditHotel";
 import Search from "./pages/search";
 import Details from "./pages/details";
 import Booking from "./pages/bookings";
+import MyBooking from "./pages/myBooking";
+import Home from "./pages/home";
 
 
 function App() {
@@ -17,7 +19,7 @@ function App() {
    <BrowserRouter>
     <Routes>
       <Route path="/" element={<Layout>
-        <p>Home page</p>
+        <Home />
       </Layout>} /> 
         <Route path="/search" element={
           <Layout>
@@ -79,6 +81,15 @@ function App() {
            element={
             <Layout>
               <Booking />
+            </Layout>
+           } 
+            />
+
+          <Route
+           path={`/my-bookings`}
+           element={
+            <Layout>
+              <MyBooking />
             </Layout>
            } 
             />
